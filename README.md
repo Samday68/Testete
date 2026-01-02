@@ -19,6 +19,7 @@ Optimize edilmiş, yüksek performanslı volatilite analiz aracı.
 - **Web Worker optimizasyonu**: Ağır hesaplamalar arka planda
 - **Service Worker entegrasyonu**: Arka planda çalışma desteği
 - **Performans iyileştirmeleri**: %90 daha hızlı render
+- **Grid renk düzeltmesi**: İki satırlı grid'deki sayı renkleri artık doğru gösteriliyor
 
 ## ⚡ Teknolojiler
 - HTML5 Canvas
@@ -72,6 +73,7 @@ Sorunlar için GitHub Issues kullanın veya iletişime geçin.
 - Web Worker optimizasyonu
 - Service Worker entegrasyonu
 - Performans iyileştirmeleri
+- Grid renk düzeltmesi (kritik düzeltme)
 
 ### v0.9
 - İlk sürüm
