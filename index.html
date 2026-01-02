@@ -1275,10 +1275,6 @@
           if (type === 'GRID_RESULT') {
             gridHistory = result.gridHistory;
             
-            // DÜZELTME: numbersTop renklerini güncelle
-            // gridHistory'den alınan renkleri numbersTop'a uygula
-            updateNumbersTopWithGridColors();
-            
             if (result.startGlobalSpan) {
               startGlobalSpan = result.startGlobalSpan;
               lastStartGlobal = xzTickCounter; // FIX: Yeni start bulunduğunda kaydet
@@ -2354,13 +2350,23 @@
         cellTop.className = 'grid-cell grid-top';
         const cellBot = document.createElement('div');
         cellBot.className = 'grid-cell grid-bottom';
-        const showColor = (item.rawColor === 'blue' || item.rawColor === 'red') ? item.rawColor : item.effColor;
+        
+        // DÜZELTME: Doğru renk kodlarını kullan
+        let displayColor;
+        if (item.rawColor === 'blue') {
+          displayColor = '#0b57d0';
+        } else if (item.rawColor === 'red') {
+          displayColor = '#d93025';
+        } else {
+          displayColor = '#666';
+        }
+        
         if (item.row === 'top') {
-          cellTop.style.color = showColor;
+          cellTop.style.color = displayColor;
           cellTop.textContent = String(item.v);
           cellBot.textContent = '';
         } else {
-          cellBot.style.color = showColor;
+          cellBot.style.color = displayColor;
           cellBot.textContent = String(item.v);
           cellTop.textContent = '';
         }
@@ -2413,24 +2419,6 @@
       label.textContent = 'start';
       box.appendChild(label);
       wrap.appendChild(box);
-    }
-
-    // DÜZELTME: numbersTop renklerini gridHistory'den güncelle
-    function updateNumbersTopWithGridColors() {
-      if (gridHistory.length === 0) return;
-      
-      const numBoxes = document.querySelectorAll('#numbersTop .num-box');
-      const visibleCount = Math.min(gridHistory.length, numBoxes.length);
-      
-      for (let i = 0; i < visibleCount; i++) {
-        const gridIndex = gridHistory.length - visibleCount + i;
-        if (gridIndex >= 0 && gridIndex < gridHistory.length) {
-          const color = gridHistory[gridIndex].effColor;
-          if (numBoxes[i]) {
-            numBoxes[i].style.background = color;
-          }
-        }
-      }
     }
 
     function updateNumbersTop() {
